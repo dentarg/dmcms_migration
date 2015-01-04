@@ -1,0 +1,8 @@
+- @news.each do |news|
+  %h2= "(#{news.news_id}) #{news.news_heading}"
+  %p= "#{Time.at(news.news_timestamp)} (#{news.news_timestamp})"
+  %p= news.news_text
+  %p= "news_related: #{news.news_related}"
+  %p= "news_published: #{news.news_published}"
+
+- # news_id, :news_timestamp, :news_heading, :news_text, :news_related, :news_published

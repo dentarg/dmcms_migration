@@ -1,0 +1,11 @@
+- @images.each do |item|
+  %h2= "(#{item.image_id}) #{item.image_name}"
+  %p= "#{Time.at(item.image_timestamp)} (#{item.image_timestamp})"
+  %p= "image_text: #{item.image_text}"
+  %p= "image_type: #{item.image_type}"
+  %p= "image_size: #{item.image_size}"
+  %p= "image_related: #{item.image_related}"
+  %img{ src: "/image/#{item.image_id}" }
+  %img{ src: "/image_thumb/#{item.image_id}" }
+
+- # image_id, :image_timestamp, :image_type, :image_data, :image_size, :image_name, :image_text, :image_related, :image_thumb

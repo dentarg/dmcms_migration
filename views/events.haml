@@ -1,0 +1,12 @@
+- @events.each do |item|
+  %h2= "(#{item.event_id}) #{item.event_name}"
+  %p= "#{Time.at(item.event_timestamp)} (#{item.event_timestamp})"
+  %p= item.event_shorttext
+  %p= item.event_text
+  %p= "event_place: #{item.event_place}"
+  %p= "event_when: #{Time.at(item.event_when)} (#{item.event_when})"
+  %p= "event_published: #{item.event_published}"
+  %p= "event_image: #{item.event_image}"
+  -# %img{ src: "/image/#{item.event_image}" }
+
+- # event_id, :event_timestamp, :event_name, :event_shorttext, :event_text, :event_place, :event_when, :event_published, :event_image
