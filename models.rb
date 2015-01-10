@@ -1,5 +1,3 @@
-require "pathname"
-
 require_relative "tumblr"
 require_relative "db_connect"
 require_relative "tumblr_log"

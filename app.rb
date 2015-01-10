@@ -24,6 +24,7 @@ class App < Sinatra::Base
     id = params["id"]
     @image = Image[id]
     halt 200 unless @image
+    content_type @image.type
     body @image.image_data
   end
 
@@ -42,13 +43,23 @@ class App < Sinatra::Base
     haml :events
   end
 
-  get '/events2' do
+  get '/events_list' do
     @events = Event.all.select { |e| e.published? }
-    haml :events2
+    haml :events_list
+  end
+
+  get '/event/:id' do |id|
+    @event = Event[id]
+    haml :event
   end
 
   get '/news' do
     @news = News.all
     haml :news
+  end
+
+  get '/news_cleaned' do
+    @news = News.all
+    haml :news_cleaned
   end
 end

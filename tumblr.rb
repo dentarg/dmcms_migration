@@ -13,7 +13,7 @@ class TumblrClient
   end
 
   def self.blog_name
-    "klubbdinmamma"
+    ENV.fetch('blog_name')
   end
 
   def self.create_post(type, opts)

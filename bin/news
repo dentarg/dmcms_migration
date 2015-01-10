@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+if ARGV.empty?
+  puts "Usage: dotenv #{__FILE__} <NEWS ID>"
+  exit 1
+end
+
+require_relative "../models"
+
+id = ARGV[0].to_i
+
+puts
+puts News[id].text
+
+puts
+puts
+
+puts News[id].cleaned_text
+puts

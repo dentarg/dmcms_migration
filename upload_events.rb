@@ -7,7 +7,7 @@ Event.all.each do |event|
     next
   end
 
-  logs = TumblrLog.where(dmcms_type: "event", dmcms_id: event.id)
+  logs = TumblrLog.where(dmcms_type: "event", dmcms_id: event.id, blog_name: TumblrClient.blog_name)
 
   if logs.any? { |log| log.tumblr_id }
     tumblr_id = logs.map(&:tumblr_id).compact.first

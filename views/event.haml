@@ -1,0 +1,11 @@
+%h2= "(#{@event.event_id}) #{@event.event_name}"
+%p= "#{Time.at(@event.event_timestamp)} (#{@event.event_timestamp})"
+%p= @event.event_shorttext
+%p= @event.event_text
+%p= "event_place: #{@event.event_place}"
+%p= "event_when: #{Time.at(@event.event_when)} (#{@event.event_when})"
+%p= "event_published: #{@event.event_published}"
+%p= "event_image: #{@event.event_image}"
+
+- if @event.image
+  %img{ src: "/image/#{@event.image.id}" }

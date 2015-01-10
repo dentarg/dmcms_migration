@@ -5,6 +5,7 @@ DB.create_table?(:tumblr_logs) do
   String :tumblr_id
   String :tumblr_type # Photo(s), Text
   DateTime :timestamp
+  String :blog_name
 end
 
 require_relative "models/event"

@@ -1,3 +1,5 @@
+require "pathname"
+
 # [:image_id, :image_timestamp, :image_type, :image_data, :image_size, :image_name, :image_text, :image_related, :image_thumb]
 class Image < Sequel::Model
   BASE_PATH = File.expand_path("~/Dropbox/work/klubbdinmamma/dmcms_images")
@@ -27,6 +29,11 @@ class Image < Sequel::Model
 
   def text
     text.to_s.force_encoding(Encoding::UTF_8)
+  end
+
+  def type
+    return "image/jpeg" if image_type == "application/octet-stream"
+    image_type
   end
 
   def timestamp

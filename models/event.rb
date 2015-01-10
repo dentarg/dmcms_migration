@@ -46,6 +46,10 @@ class Event < Sequel::Model
     Image[event_image]
   end
 
+  def image?
+    !image.nil?
+  end
+
   def all_images
     all_images = images.map(&:path)
     all_images << image.path if image
@@ -71,6 +75,8 @@ class Event < Sequel::Model
         dmcms_id: id,
         dmcms_type: :event,
         tumblr_type: tumblr_type,
+        timestamp: Time.now,
+        blog_name: TumblrClient.blog_name,
       })
 
       opts = {

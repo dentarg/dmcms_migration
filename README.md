@@ -18,13 +18,14 @@ Generate events.html, copy-paste into /events
 
 Browse content with web browser
 
-    dotenv rackup
+    dotenv bundle exec rackup
 
 ## `.env`
 
     database_url="mysql://root@localhost/klubbdinmamma"
 
     # Tumblr credentials
+    blog_name=
     consumer_key=
     consumer_secret=
     oauth_token=

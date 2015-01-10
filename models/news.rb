@@ -1,4 +1,5 @@
 require_relative "image"
+require_relative "../helpers/clean"
 
 # [:news_id, :news_timestamp, :news_heading, :news_text, :news_related, :news_published]
 class News < Sequel::Model
@@ -18,6 +19,10 @@ class News < Sequel::Model
     news_text.to_s.force_encoding(Encoding::UTF_8)
   end
 
+  def cleaned_text
+    Clean.text(text)
+  end
+
   def published?
     news_published == 1
   end
@@ -31,7 +36,7 @@ class News < Sequel::Model
   def caption
     caption = <<-EOS
     <h1>#{heading}</h1>
-    <p>#{text}</p>
+    <p>#{cleaned_text}</p>
     EOS
   end
 
@@ -49,7 +54,7 @@ class News < Sequel::Model
       tumblr_type = :text
       opts = {
         title: heading,
-        body: text,
+        body: cleaned_text,
         date: timestamp,
         tags: "news, DMCMS#{id}",
       }
@@ -63,6 +68,7 @@ class News < Sequel::Model
         dmcms_type: :news,
         tumblr_type: tumblr_type,
         timestamp: Time.now,
+        blog_name: TumblrClient.blog_name,
       })
 
       tumblr_response = TumblrClient.create_post(tumblr_type, opts)

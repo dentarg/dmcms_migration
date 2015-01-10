@@ -1,0 +1,5 @@
+%ul
+  - @events.each do |item|
+    %li
+      %a{ href: "/event/#{item.id}" }= "#{item.when_} #{item.name}"
+      = "#{item.image?}"

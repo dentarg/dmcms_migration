@@ -7,7 +7,7 @@ News.all.each do |news|
     next
   end
 
-  logs = TumblrLog.where(dmcms_type: "news", dmcms_id: news.id)
+  logs = TumblrLog.where(dmcms_type: "news", dmcms_id: news.id, blog_name: TumblrClient.blog_name)
 
   if logs.any? { |log| log.tumblr_id }
     tumblr_id = logs.map(&:tumblr_id).compact.first
