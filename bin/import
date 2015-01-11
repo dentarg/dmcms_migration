@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+def command(table)
+  hostname = "localhost"
+  username = "root"
+  database = "klubbdinmamma"
+
+  savepath = ENV.fetch("savepath")
+
+  "mysql " +
+  "--host #{hostname} " +
+  "--user #{username} " +
+  "#{database} " +
+  "< #{savepath}/#{table}.sql"
+end
+
+tables = %w(news events images)
+
+tables.each do |table|
+  puts "Importing #{table}..."
+  system command(table)
+end

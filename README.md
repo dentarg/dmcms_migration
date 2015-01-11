@@ -28,6 +28,10 @@ Dump MySQL tables
 
     dotenv bin/dump
 
+Import MySQL tables
+
+    dotenv bin/import
+
 ## `.env`
 
     database_url="mysql://root@localhost/klubbdinmamma"
