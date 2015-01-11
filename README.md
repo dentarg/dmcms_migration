@@ -20,6 +20,14 @@ Browse content with web browser
 
     dotenv bundle exec rackup
 
+Compare cleaned news text with original
+
+    dotenv bin/news <NEWS ID>
+
+Dump MySQL tables
+
+    dotenv bin/dump
+
 ## `.env`
 
     database_url="mysql://root@localhost/klubbdinmamma"
@@ -30,3 +38,10 @@ Browse content with web browser
     consumer_secret=
     oauth_token=
     oauth_token_secret=
+
+    # MySQL credentials
+    mysql_hostname=
+    mysql_username=
+    mysql_password=
+    mysql_database=
+    savepath=

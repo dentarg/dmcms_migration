@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+def command(table)
+  hostname = ENV.fetch("mysql_hostname")
+  username = ENV.fetch("mysql_username")
+  password = ENV.fetch("mysql_password")
+  database = ENV.fetch("mysql_database")
+
+  savepath = ENV.fetch("savepath")
+
+  "mysqldump " +
+  "--host #{hostname} " +
+  "--user #{username} " +
+  "--password=#{password} " +
+  "#{database} " +
+  "#{table} > #{savepath}/#{table}.sql"
+end
+
+tables = %w(news events images)
+
+tables.each do |table|
+  puts "Dumping #{table}..."
+  system command(table)
+end

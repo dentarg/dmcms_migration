@@ -6,10 +6,7 @@ class Clean
     text = text.bbcode_to_html({}, false)
 
     options = {
-      elements: [
-        "a",
-        "br"
-      ],
+      elements: %w[a br ul li],
       attributes: {
         "a" => ["href"],
       }
