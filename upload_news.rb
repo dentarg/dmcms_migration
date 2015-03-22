@@ -13,6 +13,7 @@ News.all.each do |news|
     tumblr_id = logs.map(&:tumblr_id).compact.first
     puts "Skipping news #{news.id}, already has Tumblr ID #{tumblr_id}"
   else
+    puts "Uploading news #{news.id} to Tumlbr..."
     news.to_tumblr
   end
 end

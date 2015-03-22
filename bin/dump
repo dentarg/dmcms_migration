@@ -8,6 +8,8 @@ def command(table)
 
   savepath = ENV.fetch("savepath")
 
+  abort "Not found: #{savepath}" unless Dir.exist?(savepath)
+
   "mysqldump " +
   "--host #{hostname} " +
   "--user #{username} " +

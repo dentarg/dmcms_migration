@@ -24,7 +24,7 @@ Compare cleaned news text with original
 
     dotenv bin/news <NEWS ID>
 
-Dump MySQL tables
+Dump MySQL tables (~3 minutes (images is 115M))
 
     dotenv bin/dump
 
