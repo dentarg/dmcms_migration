@@ -1,3 +1,5 @@
+require "nokogiri"
+
 require_relative "image"
 require_relative "../helpers/clean"
 
@@ -5,6 +7,10 @@ require_relative "../helpers/clean"
 class News < Sequel::Model
   def id
     news_id
+  end
+
+  def when_
+    Time.at(news_timestamp).strftime("%Y-%m-%d")
   end
 
   def timestamp
@@ -33,6 +39,30 @@ class News < Sequel::Model
     Image[image_id]
   end
 
+  def image?
+    !image.nil?
+  end
+
+  def images
+    doc = Nokogiri::HTML(text)
+    image_paths = doc.css("img").map { |img| img.attributes["src"].value }
+
+    image_ids = image_paths.map do |path|
+      match = path.match(/image.php\?id=(?<id>\d+)/)
+      image_id = match[:id] if match
+    end.compact
+
+    image_ids.map { |id| Image[id.to_i] }.compact
+  end
+
+  def images?
+    images.any?
+  end
+
+  def all_images
+    images.map(&:path)
+  end
+
   def caption
     caption = <<-EOS
     <h1>#{heading}</h1>
@@ -45,7 +75,7 @@ class News < Sequel::Model
     if image
       tumblr_type = :photo
       opts = {
-        data: image.path,
+        data: all_images,
         date: timestamp,
         tags: "news, DMCMS#{id}",
         caption: caption,

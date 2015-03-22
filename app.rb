@@ -53,13 +53,23 @@ class App < Sinatra::Base
     haml :event
   end
 
+  get '/news/:id' do |id|
+    @news = News[id]
+    haml :single_news
+  end
+
+  get '/news_list' do
+    @news = News.order(:news_timestamp).reverse
+    haml :news_list
+  end
+
   get '/news' do
-    @news = News.all
+    @news = News.order(:news_timestamp).reverse
     haml :news
   end
 
   get '/news_cleaned' do
-    @news = News.all
+    @news = News.order(:news_timestamp).reverse
     haml :news_cleaned
   end
 end

@@ -71,6 +71,7 @@ DEPENDENCIES
   bb-ruby
   haml
   mysql
+  nokogiri
   pry
   racksh
   sanitize

@@ -1,0 +1,4 @@
+%ul
+  - @news.each do |item|
+    %li
+      %a{ href: "/news/#{item.id}" }= "#{item.when_} #{item.heading}"

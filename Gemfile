@@ -9,6 +9,7 @@ gem "haml"
 gem "tumblr_client"
 gem "pry"
 gem "racksh"
+gem "nokogiri"
 
 gem "bb-ruby"
 gem "sanitize"
