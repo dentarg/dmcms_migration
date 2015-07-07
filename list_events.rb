@@ -1,13 +1,14 @@
 require_relative "models"
 require_relative "tumblr_log"
 
-events = Event.all.sort { |y,x| x.event_when <=> y.event_when }
-events.select! { |event| event.published? }
-
 File.open("events.html", "wt") do |file|
-  file.puts "<ul>"
-  events.each do |event|
-    file.puts "<li>#{event}</li>"
+  Event.years_with_events_to_be_listed.each do |year|
+    file.puts "<h3>#{year}</h3>"
+    file.puts "<ul>"
+    events = Event.list_events_from(year: year)
+    events.each do |event|
+      file.puts "<li>#{event}</li>"
+    end
+    file.puts "</ul>"
   end
-  file.puts "</ul>"
 end

@@ -1,5 +1,18 @@
 # [:event_id, :event_timestamp, :event_name, :event_shorttext, :event_text, :event_place, :event_when, :event_published, :event_image]
 class Event < Sequel::Model
+  def self.events_to_be_listed
+    events = Event.all.sort { |y,x| x.event_when <=> y.event_when }
+    events.select! { |event| event.published? }
+  end
+
+  def self.list_events_from(year: year)
+    events_to_be_listed.select { |event| event.year == year }
+  end
+
+  def self.years_with_events_to_be_listed
+    events_to_be_listed.map { |event| event.year }.uniq
+  end
+
   def id
     event_id
   end
@@ -8,6 +21,10 @@ class Event < Sequel::Model
     timestamp = Time.at(event_timestamp)
     timestamp = Time.at(event_when) if timestamp.year < 2006
     timestamp
+  end
+
+  def year
+    Time.at(event_when).year
   end
 
   def images
