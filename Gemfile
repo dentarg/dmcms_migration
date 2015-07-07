@@ -13,3 +13,4 @@ gem "nokogiri"
 
 gem "bb-ruby"
 gem "sanitize"
+gem "redcarpet" # markdown

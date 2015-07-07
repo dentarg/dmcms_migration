@@ -1,4 +1,8 @@
 %ul
   - @news.each do |item|
     %li
-      %a{ href: "/news/#{item.id}" }= "#{item.when_} #{item.heading}"
+      = "#{item.when_} #{item.heading}"
+      %a{ href: "/news/#{item.id}?clean=1" } clean
+      %a{ href: "/news/#{item.id}?md=1" } markdown
+      %a{ href: "/news/#{item.id}?unclean=1" } unclean
+      %a{ href: "http://klubbdinmamma.com/news.php?id=#{item.id}" } klubbdinmamma.com

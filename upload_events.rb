@@ -1,7 +1,10 @@
 require_relative "models"
 require_relative "tumblr_log"
 
-Event.all.each do |event|
+# upload latest first
+events = Event.all.sort { |y,x| x.timestamp <=> y.timestamp }
+
+events.each do |event|
   unless event.published?
     puts "Skipping event #{event.id}, not published"
     next

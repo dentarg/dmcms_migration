@@ -1,34 +1,40 @@
 # DMCMS migration
 
-Upload news to Tumblr (~3 minutes)
+#### Upload news to Tumblr (~3 minutes)
 
     date ; dotenv ruby upload_news.rb ; date
 
-Upload events (will reach daily photo upload limit) (~10 minutes)
+#### Upload events (will reach daily photo upload limit) (~10 minutes)
 
     date ; dotenv ruby upload_events.rb ; date
 
-Delete everything uploaded to Tumblr (to start over)
+#### Delete everything uploaded to Tumblr (to start over)
+
+All logged (`TumblrLog`) posts:
 
     dotenv ruby delete.rb
 
-Generate events.html, copy-paste into /events
+All posts (~1.5 minutes for 125 posts):
+
+    date ; dotenv bundle exec ruby delete_from.rb ; date
+
+#### Generate events.html, copy-paste into /events
 
     dotenv ruby list_events.rb
 
-Browse content with web browser
+#### Browse content with web browser
 
     dotenv bundle exec rackup
 
-Compare cleaned news text with original
+#### Compare cleaned news text with original
 
     dotenv bin/news <NEWS ID>
 
-Dump MySQL tables (~3 minutes (images is 115M))
+#### Dump MySQL tables (~3 minutes (images is 115M))
 
     dotenv bin/dump
 
-Import MySQL tables
+#### Import MySQL tables
 
     dotenv bin/import
 
@@ -49,3 +55,8 @@ Import MySQL tables
     mysql_password=
     mysql_database=
     savepath=
+
+## Some of the gems used
+
+* https://github.com/cpjolicoeur/bb-ruby
+* https://github.com/rgrove/sanitize

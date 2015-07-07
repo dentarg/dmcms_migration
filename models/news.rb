@@ -26,7 +26,7 @@ class News < Sequel::Model
   end
 
   def cleaned_text
-    Clean.text(text)
+    Clean.text(text).strip
   end
 
   def published?
@@ -64,33 +64,37 @@ class News < Sequel::Model
   end
 
   def caption
-    caption = <<-EOS
-    <h1>#{heading}</h1>
-    <p>#{cleaned_text}</p>
-    EOS
+    caption = ""
+    caption << "<h1>#{heading}</h1>"
+    caption << "\n\n"
+    caption << "#{cleaned_text}"
+  end
+
+  def tumblr_type
+    return :photo if image
+    :text
   end
 
   def to_tumblr
-
     if image
-      tumblr_type = :photo
       opts = {
         data: all_images,
         date: timestamp,
         tags: "news, DMCMS#{id}",
         caption: caption,
+        format: "markdown",
       }
     else
-      tumblr_type = :text
       opts = {
         title: heading,
         body: cleaned_text,
         date: timestamp,
         tags: "news, DMCMS#{id}",
+        format: "markdown",
       }
     end
 
-    puts "Uploading news #{id} to Tumlbr... (#{tumblr_type})"
+    puts "[#{__FILE__}] Uploading news #{id} to Tumlbr... (#{tumblr_type})"
 
     if published?
       log = TumblrLog.create({

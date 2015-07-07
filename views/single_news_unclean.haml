@@ -1,0 +1,12 @@
+- @title = @news.heading
+
+%h2= "#{@news.heading}"
+
+-if @news.images?
+  -@news.images.each do |image|
+    %p
+      %img{ src: "/image/#{image.id}", width: "600px" }
+-else
+  %p Ingen bild
+
+%p= @news.text

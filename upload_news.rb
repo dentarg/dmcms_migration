@@ -1,9 +1,14 @@
 require_relative "models"
 require_relative "tumblr_log"
 
-News.all.each do |news|
+latest_first = News.order(:news_timestamp).reverse.all
+oldest_first = News.order(:news_timestamp).all
+
+news = latest_first
+
+news.each do |news|
   unless news.published?
-    puts "Skipping news #{news.id}, not published"
+    puts "[#{__FILE__}] Skipping news #{news.id}, not published"
     next
   end
 
@@ -11,9 +16,9 @@ News.all.each do |news|
 
   if logs.any? { |log| log.tumblr_id }
     tumblr_id = logs.map(&:tumblr_id).compact.first
-    puts "Skipping news #{news.id}, already has Tumblr ID #{tumblr_id}"
+    puts "[#{__FILE__}] Skipping news #{news.id}, already has Tumblr ID #{tumblr_id}"
   else
-    puts "Uploading news #{news.id} to Tumlbr..."
+    puts "[#{__FILE__}] Uploading news #{news.id} to Tumlbr..."
     news.to_tumblr
   end
 end

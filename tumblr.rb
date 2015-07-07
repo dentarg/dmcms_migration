@@ -12,6 +12,10 @@ class TumblrClient
     @@client ||= Tumblr::Client.new
   end
 
+  def self.posts
+    client.posts(blog_name)
+  end
+
   def self.blog_name
     ENV.fetch('blog_name')
   end
@@ -21,6 +25,10 @@ class TumblrClient
   end
 
   def self.delete(id)
+    client.delete(blog_name, id)
+  end
+
+  def self.delete_from(blog_name, id)
     client.delete(blog_name, id)
   end
 end

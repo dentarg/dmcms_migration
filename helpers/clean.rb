@@ -5,10 +5,10 @@ require_relative "youtube_transformer"
 
 class Clean
   def self.text(text)
-    text = text.bbcode_to_html({}, false)
+    text = text.bbcode_to_html({}, false) # false = disable auto-escape HTML tags
 
     options = {
-      elements: %w[a br ul li iframe],
+      elements: %w[a br ul li iframe div],
       attributes: {
         "a" => ["href"],
       },

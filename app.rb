@@ -1,6 +1,7 @@
 require "sinatra/base"
 require "sinatra/reloader"
 require "haml"
+require "redcarpet"
 
 require_relative "models"
 
@@ -8,6 +9,8 @@ class App < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
+
+  set :layout, true
 
   get '/bands' do
   end
@@ -44,7 +47,10 @@ class App < Sinatra::Base
   end
 
   get '/events_list' do
-    @events = Event.all.select { |e| e.published? }
+    events = Event.all.sort { |y,x| x.timestamp <=> y.timestamp }
+    events.select! { |event| event.published? }
+
+    @events = events
     haml :events_list
   end
 
@@ -55,7 +61,14 @@ class App < Sinatra::Base
 
   get '/news/:id' do |id|
     @news = News[id]
-    haml :single_news
+
+    if params['clean']
+      haml :single_news_clean
+    elsif params['unclean']
+      haml :single_news_unclean
+    elsif params['md']
+      haml :single_news_clean_md
+    end
   end
 
   get '/news_list' do
