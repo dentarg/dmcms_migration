@@ -450,7 +450,9 @@ onmouseout="this.src='http://static.tumblr.com/9xrpiej/QiNnr1ycx/btn_about_up.jp
   {block:Text}
     {block:Title}<h2>{Title}</h2>{/block:Title}
     {block:Date}
-      <small>{DayOfWeek} {DayOfMonth}{DayOfMonthSuffix} {Month} {Year}</small>
+      <a href="{Permalink}">
+        <small>{DayOfWeek} {DayOfMonth}{DayOfMonthSuffix} {Month} {Year}</small>
+      </a>
     {/block:Date}
 
     <p class="content_text">{Body}</p>
@@ -461,7 +463,9 @@ onmouseout="this.src='http://static.tumblr.com/9xrpiej/QiNnr1ycx/btn_about_up.jp
     <br />
 
     {block:Date}
-      <small>{DayOfWeek} {DayOfMonth}{DayOfMonthSuffix} {Month} {Year}</small>
+      <a href="{Permalink}">
+        <small>{DayOfWeek} {DayOfMonth}{DayOfMonthSuffix} {Month} {Year}</small>
+      </a>
     {/block:Date}
     {block:Caption}
       <p class="content_text">{Caption}</p>
