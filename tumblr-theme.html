@@ -447,6 +447,16 @@ onmouseout="this.src='http://static.tumblr.com/9xrpiej/QiNnr1ycx/btn_about_up.jp
 
 <div id="main">
 
+{block:HasPages}{block:Pages}
+
+  {block:Text}
+    {block:Title}<h2>{Title}</h2>{/block:Title}
+
+    <p class="content_text">{Body}</p>
+  {/block:Text}
+
+{/block:Pages}{/block:HasPages}
+
 {block:Posts}
 
   {block:Text}
