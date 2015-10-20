@@ -10,10 +10,6 @@
 
 #### Delete everything uploaded to Tumblr (to start over)
 
-All logged (`TumblrLog`) posts:
-
-    dotenv ruby delete.rb
-
 All posts (~1.5 minutes for 125 posts):
 
     date ; dotenv bundle exec ruby delete_from.rb ; date
